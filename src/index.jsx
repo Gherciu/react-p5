@@ -54,6 +54,7 @@ export default class Sketch extends React.Component {
       <div
         ref={this.canvasParentRef}
         className={this.props.className || "react-p5"}
+        data-testid="react-p5"
         style={this.props.style || {}}
       />
     );
