@@ -92,6 +92,19 @@ mouseClicked(_p5, event) {
   console.log(event)
 }
 ```
+- Events that are accessed using props are always attached to `window`. 
+That means that events are triggered throughout the whole page ([see the p5 docs for reference](https://p5js.org/reference/#/p5.Element/mousePressed)).  
+If you would like to attach events to a specific element, you can do so by using `addEventListener` in your setup function. 
+
+As an example limiting click events to the canvas:
+```javascript
+const setup = (p5, canvasParentRef) => {
+      canvasParent = p5.createCanvas(width, height).parent(canvasParentRef)
+      canvasParent.elt.addEventListener("mousedown", (event) => {
+        console.log("Clicked on the canvas. Event:", event)
+      })
+    }
+```
 
 ## Props
 
@@ -120,22 +133,6 @@ mouseClicked(_p5, event) {
 | [deviceTurned](https://p5js.org/reference/#/p5/deviceTurned)   | :x:                | Function | The deviceTurned() function is called when the device rotates by more than 90 degrees continuously.                                                                                                                   |
 | [deviceShaken](https://p5js.org/reference/#/p5/deviceShaken)   | :x:                | Function | The deviceShaken() function is called when the device total acceleration changes of accelerationX and accelerationY values is more than the threshold value. The default threshold is set to 30.                      |
 
-A note on events:
----
-Events that are accessed using props are always attached to `window`. 
-That means that events are triggered throughout the whole page ([see the p5 docs for reference](https://p5js.org/reference/#/p5.Element/mousePressed)).  
-If you would like to attach events to a specific element, you can do so by using `addEventListener` in your setup function. 
-
-As an example limiting click events to the canvas:
-
-```javascript
-const setup = (p5, canvasParentRef) => {
-      canvasParent = p5.createCanvas(width, height).parent(canvasParentRef)
-      canvasParent.elt.addEventListener("mousedown", (event) => {
-        console.log("Clicked on the canvas. Event:", event)
-      })
-    }
-```
 
 ## Contributing
 
